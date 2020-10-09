@@ -6,16 +6,17 @@ import math, re
 sum = 0
 num = float(input("Enter a number> "))
 entry_count = 0
-sum += num
 while(num >= 0):
+    sum+=num
     num = float(input("Enter a number> "))
     entry_count += 1
-    sum+=num
 print("You entered",entry_count,"numbers")
 print("The total of the numbers you entered is:",sum)
 print("So the average is",round(sum/entry_count,1),"to 1 d.p.")
 
 # ---- PRACTICAL ----
+
+# ---- Exercise 1 ----
 
 # Write a program that take a sentence or a word as an input and print if it is a palindrome or not.
 # ‘Dammit, I'm mad!’ is also considered a palindrome when neither punctuation nor spaces are taken into account.
@@ -33,3 +34,19 @@ if(flag):
     print("This is NOT palindromic")
 else:
     print("This IS palindromic")
+
+# ---- Exercise 2 ----
+
+# Write a script that takes a sentence from the user without any punctuation and prints
+# the sentence without any white spaces. Note a white space is represented by ' ', and
+# an empty string is represented by ''.
+print(re.sub(r"\s","",input("Enter a sentence> ")))
+
+# Same as above except that each word in the output should start with a upper case letter
+# and all other letter should be lower case (also known as CamelCase).
+print(re.sub(r"(\b[a-z])", lambda x : x.group(1).upper() ,input("Enter a sentence> ").lower()))
+
+# Write a script that takes a sentence from a user written in CamelCase (without any blank
+# spaces), creates the list of words from that sentence, and then prints that list.
+# Example input: ThisIsACamelCaseSentenceWithNoSpaces
+print(re.findall(r"([A-Z].*?)(?=[A-Z]|$)",input("Enter a sentence> ")))
