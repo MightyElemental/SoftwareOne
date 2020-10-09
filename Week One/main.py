@@ -1,11 +1,19 @@
 import math
 
+LBS_PER_KG = 2.20462
+
 #Q1
 
 stones = int(input("stones> "))
 pounds = int(input("pounds> "))
 
-print("")
+total_pounds = stones*14+pounds
+
+print(stones,"stone,",pounds,"pounds is",round(total_pounds/LBS_PER_KG,1),"kilograms")
+
+kg = int(input("KG> "))
+total_pounds = LBS_PER_KG*kg
+print(kg,"kilograms is",round(total_pounds/14,0),"stone",round(total_pounds%14,1),"pounds")
 
 #Q3
 def getPrice(kg):
@@ -15,7 +23,8 @@ def getPrice(kg):
         postage -= 1.5
     return cost+postage
 
-print(getPrice(1))
+kg = int(input("How many kilos of bananas? "))
+print(getPrice(kg))
 
 #Q4
 def getState(age,rate):
