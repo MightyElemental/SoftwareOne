@@ -35,6 +35,10 @@ if(flag):
 else:
     print("This IS palindromic")
 
+# Written bt Charlie (xo#1111)
+def palindrome(word):
+    return word == word[::-1]
+
 # ---- Exercise 2 ----
 
 # Write a script that takes a sentence from the user without any punctuation and prints
