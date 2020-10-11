@@ -17,7 +17,6 @@ else:
     prime_list = [int(x) for x in f.readlines()]
     f.close()
 
-
 def isPrime(number: int):
     if(number <= 3):
         return number > 1
@@ -59,16 +58,6 @@ def primeFactorize(number: int):
             p_index+=1
     return factor_list
 
-def productList(number_list: list):
-    result = 1
-    for n in number_list:
-        result *= n
-    return result
-
-def productOfUniquePrimeFactors(number: int):
-    unique_factors=set(primeFactorize(number))
-    return productList(unique_factors)
-
 number = int(input("Enter an integer (<1,000,000) to factorize: "))
 while number > 1000000:
     print("That number was larger than 1,000,000!")
@@ -82,4 +71,4 @@ if(len(p_factors) == 1):
     print("\nYour number is prime!\nIt is its only factor!")
 else:
     print("\nThe prime factors of your number is", p_factors)
-    print("The product of the unique numbers is", productList(set(p_factors)))
+    print("The product of the unique numbers is", math.prod(set(p_factors)))
