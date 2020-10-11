@@ -6,15 +6,17 @@ import math, os
 __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 cache_location = __location__+"/primes.cache"
 
+prime_list = []
+
 # Create cache if it does not exist
 if not os.path.exists(cache_location):
     os.mknod(cache_location)
-
-f = open(cache_location, "r")
-prime_list = [int(x) for x in f.readlines()]
-f.close()
-if(len(prime_list) == 0):
     prime_list = [2, 3]
+else:
+    f = open(cache_location, "r")
+    prime_list = [int(x) for x in f.readlines()]
+    f.close()
+
 
 def isPrime(number: int):
     if(number <= 3):
