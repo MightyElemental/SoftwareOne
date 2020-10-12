@@ -35,10 +35,10 @@ print(list_2d)
 
 # Modify your script so the output is formatted in a table
 # Modify your script so the 0 are replaced by a blank space
-print("+-+-+-+-+")
+print("+-"*len(list_2d[0])+"+")
 for x in range(len(list_2d)):
     print("|","|".join(map(str,list_2d[x])).replace("0"," "),"|", sep="")
-    print("+-+-+-+-+")
+    print("+-"*len(list_2d[x])+"+")
 
 # ---- Exercise 3 ----
 
