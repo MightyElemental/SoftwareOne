@@ -20,6 +20,8 @@ print("Here is the list of even numbers:",even_numbers)
 print("Here is the set of distinct even numbers:",set(even_numbers))
 
 # ---- Exercise 2 ----
+# The aim of this exercise is to draw a sudoku board (not to solve it). To start with we will be
+# using a 4 × 4 board (as opposed to the classic 9 × 9)
 
 # Write a script that asks a user to enter 4 digits (comprised between 0 and 4) separated
 # by a white space, the store each digit in a list and print the list.
