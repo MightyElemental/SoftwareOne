@@ -21,7 +21,7 @@ print("So the average is",round(sum/entry_count,1),"to 1 d.p.")
 # Write a program that take a sentence or a word as an input and print if it is a palindrome or not.
 # ‘Dammit, I'm mad!’ is also considered a palindrome when neither punctuation nor spaces are taken into account.
 # Change your program so it can recognise these palindromes too.
-# This is the suggested method from Lillian Blot
+# Comparing front and end of the string is the suggested method from Lillian Blot
 def isPalindomic(phrase: str) -> bool:
     phrase_len = len(phrase)
     for i in range(math.ceil(phrase_len/2)):
