@@ -32,6 +32,7 @@ def isPalindomic(phrase: str) -> bool:
     return True
 
 phrase = input("Enter a phrase> ").lower()
+# Alternative method is to move front/end pointer (not done here) to skip any non-alpha character.
 phrase = re.sub("[^a-z]", "", phrase) # use regex to remove any non-letter
 
 if(isPalindomic(phrase)):
