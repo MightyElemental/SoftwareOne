@@ -21,7 +21,7 @@ print("So the average is",round(sum/entry_count,1),"to 1 d.p.")
 # Write a program that take a sentence or a word as an input and print if it is a palindrome or not.
 # ‘Dammit, I'm mad!’ is also considered a palindrome when neither punctuation nor spaces are taken into account.
 # Change your program so it can recognise these palindromes too.
-# Comparing front and end of the string is the suggested method from Lillian Blot
+# Comparing front and end of the string is the suggested method from Lilian Blot
 def isPalindomic(phrase: str) -> bool:
     phrase_len = len(phrase)
     for i in range(math.ceil(phrase_len/2)):
@@ -62,6 +62,9 @@ print(re.sub(r"(\b[a-z])", lambda x : x.group(1).upper(), input("Enter a sentenc
 print(re.findall(r"([A-Z].*?)(?=[A-Z]|$)", input("Enter a sentence written in CamelCase with no spaces> ")))
 
 # ---- Exercise 3 ----
+
+# Lilian Blot suggests using a custom alphabet to allow other languages other than just English
+# He also advises to avoid hard-coded values (e.g. 26 letters in alphabet)
 
 # Write a script that encrypts a plain text into a cypher text using the Caesar Cipher algorithm.
 def caeserEncrypt(msg: str, shift: int) -> str:
