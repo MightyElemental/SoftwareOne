@@ -10,9 +10,7 @@ given whole number (int) given as parameter. For example:
 
 # Convert int to a list of digits then sum the list
 def sum_digits(number: int) -> int:
-    digit_list = [int(d) for d in str(number)]
-    result = sum(digit_list)
-    return result
+    return sum([int(d) for d in str(number)])
 
 print("---")
 print(sum_digits(1234))
@@ -37,7 +35,7 @@ def pairwise_digits(number_a: int, number_b: int) -> str:
     a_lst  = [d for d in str(number_a)]
     b_lst  = [d for d in str(number_b)]
     result = ""
-    for x in range(0,max(len(a_lst),len(b_lst))):
+    for x in range(max(len(a_lst),len(b_lst))):
         if(x >= len(a_lst) or x >= len(b_lst)):
             result += "0"
             continue
@@ -51,6 +49,17 @@ print("---")
 print(pairwise_digits(1213, 2113))  # 0011
 print(pairwise_digits(1213, 10435)) # 10010
 print(pairwise_digits(1213, 121))   # 1110
+
+# Written by (presumably) tomster12#7972
+def pairwise_digits_tomster12(a: str, b: str) -> str:
+    bits = "".join(["1" if a[i] == b[i] else "0" for i in range(min(len(a), len(b)))])
+    bits = bits.ljust(max(len(a), len(b)), "0")
+    return bits
+
+print("---")
+print(pairwise_digits_tomster12("1213", "2113"))  # 0011
+print(pairwise_digits_tomster12("1213", "10435")) # 10010
+print(pairwise_digits_tomster12("1213", "121"))   # 1110
 
 # ---- Exercise 3 ----
 '''
@@ -68,8 +77,7 @@ represents 255
 def to_base10(binary: int) -> int:
     digit_list = [int(d) for d in str(binary)]
     digits = len(digit_list)
-    denary_num = sum([digit_list[x]*(2**(digits-x-1)) for x in range(0,digits)])
-    return denary_num
+    return sum([digit_list[x]*(2**(digits-x-1)) for x in range(0,digits)])
 
 print("---")
 print(to_base10(10001011)) # 139

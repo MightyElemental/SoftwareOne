@@ -20,7 +20,7 @@ wise man. The program should print the weight of rice for each chessboard square
 # for position x, y, the amount of rice is calculated as such (first square is 0,0):
 # 2**(y*8+x)
 
-## [[[gain_count, grain_mass, grain_mass_hr],...],...]
+## [[gain_count,...],...]
 chess_board = []
 
 # milligrams, ..., tonnes, kilotonnes, ..., teratonnes
@@ -43,10 +43,7 @@ for x in range(8):
     row = []
     for y in range(8):
         grain_count = 2**(x*8+y)
-        grain_mass = 30*grain_count
-        grain_mass_hr = humanReadableAmount(grain_mass)
-        cell = [grain_count,grain_mass,grain_mass_hr]
-        row.append(cell)
+        row.append(grain_count)
     chess_board.append(row)
 
 print("---")
@@ -54,12 +51,12 @@ print("---")
 # print grain masses in table (all values are rounded)
 print("+-----"*len(chess_board[0])+"+")
 for x in range(len(chess_board)):
-    masses = ['{s:{c}^{n}}'.format(s=cell[2],n=5,c=' ') for cell in chess_board[x]]
+    masses = ['{s:{c}^{n}}'.format(s=humanReadableAmount(cell*30),n=5,c=' ') for cell in chess_board[x]]
     print("|","|".join(map(str,masses)),"|", sep="")
     print("+-----"*len(chess_board[x])+"+")
 
 # print the total mass of grain
-total_mass = sum([cell[1] for cell in row for row in chess_board])
+total_mass = sum([cell*30 for cell in row for row in chess_board])
 print("Total mass:",humanReadableAmount(total_mass, True))
 
 
