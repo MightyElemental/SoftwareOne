@@ -49,6 +49,8 @@ for x in range(8):
         row.append(cell)
     chess_board.append(row)
 
+print("---")
+
 # print grain masses in table (all values are rounded)
 print("+-----"*len(chess_board[0])+"+")
 for x in range(len(chess_board)):
@@ -61,8 +63,9 @@ total_mass = sum([cell[1] for cell in row for row in chess_board])
 print("Total mass:",humanReadableAmount(total_mass, True))
 
 
-# ---- Exercise 2: from a resit paper ----
+# ---- Exercise 2, 3: from a resit paper ----
 '''
+---- Exercise 2 ----
 You must use the file textanalysis.py to answer this question. Write a function
 get_words_starting_with(text, letter) that returns the list of words starting
 with letter in the string text. The result should not be case sensitive, e.g. ’about’ should
@@ -78,11 +81,21 @@ For example, using the variable sample_text we should obtain:
 ’a’, ’ABC’, ’appeal’, ’as’, ’a’, ’a’, ’and’, ’a’]
 >>> get_words_starting_with(sample_text, ’z’)
 []
+
+---- Exercise 3 ----
+As you can see in question 2, there are many repetitions of the word ’a’ in the list. Improve
+your solution so no repetition of the same word occurs in the list.
+
+>>> get_words_starting_with(sample_text, ’a’)
+[’As’, ’a’, ’about’, ’adding’, ’ago’, ’around’,
+’Amsterdam’, ’and’, ’an’, ’ABC’, ’appeal’, ’as’]
 '''
 
 # Use regex to find words starting with specific letter
 def get_words_starting_with(text: str, letter: str) -> str:
     if(len(letter) != 1): raise Exception("letter must be a single character!")
-    return re.findall(r"(?i)(\b["+letter+"].*?)\s", text)
+    return set(re.findall(r"(?i)(\b["+letter+"].*?)\s", text))
 
+print("---")
 print(get_words_starting_with(textanalysis.sample_text, 'a'))
+
