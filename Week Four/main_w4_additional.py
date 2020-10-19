@@ -1,3 +1,5 @@
+import re
+import textanalysis
 # WEEK 4 - ADDITIONAL EXERCISES
 
 # ---- Exercise 1: The King and the Wise man ----
@@ -54,5 +56,33 @@ for x in range(len(chess_board)):
     print("|","|".join(map(str,masses)),"|", sep="")
     print("+-----"*len(chess_board[x])+"+")
 
+# print the total mass of grain
 total_mass = sum([cell[1] for cell in row for row in chess_board])
 print("Total mass:",humanReadableAmount(total_mass, True))
+
+
+# ---- Exercise 2: from a resit paper ----
+'''
+You must use the file textanalysis.py to answer this question. Write a function
+get_words_starting_with(text, letter) that returns the list of words starting
+with letter in the string text. The result should not be case sensitive, e.g. ’about’ should
+be returned if the letter ’a’ or ’A’ is given as parameter. For simplicity, we assume for exercises
+2,3, and 4 that the text does not have any punctuations, and words are separated by at least one
+blank space.
+
+For example, using the variable sample_text we should obtain:
+
+>>> get_words_starting_with (sample_text, ’a’)
+[’As’, ’a’, ’about’, ’adding’, ’a’, ’ago’, ’a’,
+’around’, ’Amsterdam’, ’a’, ’and’, ’an’, ’about’,
+’a’, ’ABC’, ’appeal’, ’as’, ’a’, ’a’, ’and’, ’a’]
+>>> get_words_starting_with(sample_text, ’z’)
+[]
+'''
+
+# Use regex to find words starting with specific letter
+def get_words_starting_with(text: str, letter: str) -> str:
+    if(len(letter) != 1): raise Exception("letter must be a single character!")
+    return re.findall(r"(?i)(\b["+letter+"].*?)\s", text)
+
+print(get_words_starting_with(textanalysis.sample_text, 'a'))
