@@ -157,6 +157,43 @@ def caesar_decrypt_brute_force(text: str) -> str:
 
 print("---")
 msg = "bpm owwl vmea ijwcb kwuxcbmza qa bpib bpmg lw epib gwc bmtt bpmu bw lw. bpm jil vmea qa bpib bpmg lw epib gwc bmtt bpmu bw lw."
-print(caesar_decrypt_brute_force(msg))
+caesar_decrypt_brute_force(msg)
 # the good news about computers is that they do what you tell them to do. the bad news is that they do what you tell them to do.
 
+
+# ---- Exercise 5: Vectors ----
+'''
+A vector of dimension 𝑛𝑛 can be represented by a list in Python. For example, a vector of
+dimension 3 could represent a point in space, and a vector of dimension 4 could represent a
+point in space and time (the fourth dimension being the time).
+
+The vector could be stored in a Python list [a, b, c]. There are two simple operations that
+can be done on vector, and the result of the two operation is also a vector. The two operations
+are: Scalar product, and addition.
+
+Implement two functions:
+
+1. scalar_product(scalar, vector) where scalar is a float and vector is a list
+of float. The function returns the scalar product of the two parameters.
+
+2. vector_addition(vector1, vector2) where vector1 and vector2 are
+lists of float. The function returns the vector addition of the two parameters. If
+vector1 and vector2 don’t have the same dimension, you should print an error
+message and return None.
+'''
+
+def scalar_product(scalar: int, vector: list) -> list:
+    return [scalar*x for x in vector]
+
+def vector_addition(vector1: list, vector2: list) -> list:
+    if(len(vector1) != len(vector2)): raise Exception("Vectors must have same dimensions!")
+    return [vector1[i]+vector2[i] for i in range(len(vector1))]
+
+vec1 = [3,4,5]
+vec2 = [6,7,8]
+vec3 = [1,2,3,4,5]
+
+print("---")
+print(scalar_product(5, vec1))     # [15, 20, 25]
+print(vector_addition(vec1, vec2)) # [9, 11, 13]
+print(vector_addition(vec1, vec3)) # Exception: Vectors must have same dimensions!
