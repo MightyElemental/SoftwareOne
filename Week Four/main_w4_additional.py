@@ -99,3 +99,64 @@ def get_words_starting_with(text: str, letter: str) -> str:
 print("---")
 print(get_words_starting_with(textanalysis.sample_text, 'a'))
 
+# ---- Exercise 4: extension of Practical 2 Exercise 3 ----
+'''
+In cryptography, a Caesar cipher, also known as the shift cipher, is one of the simplest and
+most widely known encryption techniques. It is a type of substitution cipher in which each
+letter in the plain text is replaced by a letter some fixed number of positions down the alphabet. 
+
+For example, with a shift of 3, A would be replaced by D, B would become E, and so on. The
+method is named after Julius Caesar, who used it to communicate with his generals.
+
+Mathematically, a Caesar cipher can be expressed by
+the following equation:
+c = (p + a) mod 26
+
+1. Write a function caesar_encrypt that encrypts a plain text into a cypher text using
+the Caesar Cipher algorithm. What parameters are needed? Should the function return
+something? For simplicity, assume that only alphabet letters are encrypted, other
+symbols remain the same.
+
+2. Write a function caesar_decrypt that decrypts a cipher text into a plain text using
+the Caesar Cipher algorithm. What parameters are needed?
+
+3. Given the cipher text below, and knowing it has been encrypted using a Caesar Cipher
+algorithm, could you decrypt it?
+"bpm owwl vmea ijwcb kwuxcbmza qa bpib bpmg lw epib gwc
+bmtt bpmu bw lw. bpm jil vmea qa bpib bpmg lw epib gwc
+bmtt bpmu bw lw."
+'''
+
+def caesar_encrypt(text: str, shift: int, alphabet: str = "abcdefghijklmnopqrstuvwxyz") -> str:
+    encrypted_msg = ""
+    for c in text.lower():
+        if c not in alphabet:
+            # "other symbols remain the same"
+            encrypted_msg+=c
+            continue
+        index = alphabet.index(c)
+        new_index = (index+shift) % len(alphabet)
+        encrypted_msg += alphabet[new_index]
+    return encrypted_msg
+
+def caesar_decrypt(text: str, shift: int, alphabet: str = "abcdefghijklmnopqrstuvwxyz") -> str:
+    decrypted_msg = ""
+    for c in text.lower():
+        if c not in alphabet:
+            # "other symbols remain the same"
+            decrypted_msg+=c
+            continue
+        index = alphabet.index(c)
+        new_index = (index-shift) % len(alphabet)
+        decrypted_msg += alphabet[new_index]
+    return decrypted_msg
+
+def caesar_decrypt_brute_force(text: str) -> str:
+    for i in range(26):
+        print("shift +",i,":",caesar_decrypt(text,i))
+
+print("---")
+msg = "bpm owwl vmea ijwcb kwuxcbmza qa bpib bpmg lw epib gwc bmtt bpmu bw lw. bpm jil vmea qa bpib bpmg lw epib gwc bmtt bpmu bw lw."
+print(caesar_decrypt_brute_force(msg))
+# the good news about computers is that they do what you tell them to do. the bad news is that they do what you tell them to do.
+
