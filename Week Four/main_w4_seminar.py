@@ -104,6 +104,7 @@ def merge(listA: list, listB: list) -> list:
             bindex = bindex + 1
     return result
 
+print("---")
 print(merge([1,3,4,7],[2,3,5]))
 
 # I am in pain due to the pseudocode
@@ -125,4 +126,45 @@ few words about its origins."
 You can assume that a string has a method contains(Character) that returns true if the
 character is in the string, false otherwise. This exercise is more challenging than it may look
 like.
+'''
+
+# The question doesn't mention pseudocode, but I'll try it anyway.
+
+sampleText = "As Python's creator, I'd like to say a few words about its origins."
+
+def splitText(text: str, delimiters: str) -> list:
+    result = []
+    buffer = ""
+    for c in text:
+        if c in delimiters:
+            if len(buffer) > 0:
+                result.append(buffer)
+                buffer=""
+        else:
+            buffer += c
+    return result
+
+print("---")
+print(splitText(sampleText, ", '."))
+# ['As', 'Python', 's', 'creator', 'I', 'd', 'like', 'to', 'say', 'a', 'few', 'words', 'about', 'its', 'origins']
+
+'''
+As per page 67 of Mehlhorn-Sanders-Toolbox.pdf, I'm using UArray to have unbounded arrays
+I'm assuming that Strings work in basically the same way.
+I'm assuming arrays and strings have the length/size function.
+
+Function splitText(text: String, delimiters: String): UArray
+    result : UArray
+    buffer : String
+    for c:String in text do
+        if delimiters.contains(c) then
+            if buffer.length > 0 then
+                result.pushBack(buffer)
+                buffer = ""
+            else
+                buffer = buffer + c
+            endif
+        endif
+    endfor
+    return result
 '''
