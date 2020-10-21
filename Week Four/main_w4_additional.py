@@ -56,8 +56,9 @@ for x in range(len(chess_board)):
     print("+-----"*len(chess_board[x])+"+")
 
 # print the total mass of grain
-total_mass = sum([cell*30 for cell in row for row in chess_board])
-print("Total mass:",humanReadableAmount(total_mass, True))
+total_grains = sum(sum(chess_board,[]))
+print("Total grains:",total_grains)
+print("Total mass:",humanReadableAmount(total_grains*30, True))
 
 
 # ---- Exercise 2, 3: from a resit paper ----
