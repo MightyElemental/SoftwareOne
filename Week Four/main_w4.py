@@ -35,14 +35,12 @@ def pairwise_digits(number_a: int, number_b: int) -> str:
     a_lst  = [d for d in str(number_a)]
     b_lst  = [d for d in str(number_b)]
     result = ""
-    for x in range(max(len(a_lst),len(b_lst))):
-        if(x >= len(a_lst) or x >= len(b_lst)):
-            result += "0"
-            continue
+    for x in range(min(len(a_lst),len(b_lst))):
         if(a_lst[x]==b_lst[x]):
             result += "1"
         else:
             result += "0"
+    result+="0"*abs(len(a_lst)-len(b_lst))
     return result
 
 print("---")
