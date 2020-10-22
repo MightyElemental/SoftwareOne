@@ -60,6 +60,10 @@ total_grains = sum(sum(chess_board,[]))
 print("Total grains:",total_grains)
 print("Total mass:",humanReadableAmount(total_grains*30, True))
 
+'''
+I was challenged to write a one-liner solution for this problem. It doesn't do the same thing as my answer above, but it gives the correct values...
+print(f'{sum(list(filter(lambda a: a!=None, sum([[print((1<<t)*30,"mg"), 1<<t] for t in range(64)],[]))))*30/1000} grams')
+'''
 
 # ---- Exercise 2, 3: from a resit paper ----
 '''
