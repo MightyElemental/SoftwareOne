@@ -90,12 +90,9 @@ For example:
 [1,2,3,3,4,5,7]
 '''
 
-# Just want to comment that I hate pseudocode with a passion, and see no use for it.
-# Especially when the syntax is more complex than any (not every) programming language.
-
 '''
 Function merge(listA: List, listB: List): List
-    result := Array[0..(listA.length+listB.length)] of int
+    result = empty List
     aindex = 0 : int
     bindex = 0 : int
     while aindex < listA.length || bindex < listB.length do
@@ -164,8 +161,6 @@ You can assume that a string has a method contains(Character) that returns true 
 character is in the string, false otherwise. This exercise is more challenging than it may look
 like.
 '''
-
-# The question doesn't mention pseudocode, but I'll try it anyway.
 
 sampleText = "As Python's creator, I'd like to say a few words about its origins."
 
