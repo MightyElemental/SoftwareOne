@@ -1,3 +1,4 @@
+import random
 # WEEK 5 - SEMINAR 2
 
 # ---- Exercise 1 ----
@@ -67,5 +68,66 @@ This is quite difficult, and a better approach will be explained during the semi
 it does not hurt to have a thought about it beforehand.
 '''
 
-# Maybe sum pairs of the numbers and generate a new list. I.e., -2+1 = -1, -3+4=1
-# Then maybe sum those down (maybe not)
+# Probably use start and end pointers. Not sure how that would work since they'd need to look forward to the end which could use a lot of processing.
+
+
+# ---- Exercise 2 ----
+'''
+Given a matrix (2D list) A[0. . n − 1, 0. . m − 1] of numbers, find the largest possible sum of a
+rectangle submatrix. The top-left element in the matrix is A[0][0], and the element A[r][c] is
+the element at row r, column c.
+
++-----+----+----+----+----+
+|  6  | -5 | -7 |  4 | -4 |
++-----+----+----+----+----+
+|  -9 |  3 | -6 |  5 |  2 |
++-----+----+----+----+----+
+| -10 |  4 |  7 | -6 |  3 |
++-----+----+----+----+----+
+|  -8 |  9 | -3 |  3 | -7 |
++-----+----+----+----+----+
+
+For example, for the matrix given above, the rectangle with the largest sum is highlighted in
+red with sum 17.
+'''
+def sum_submatrix(matrix:list, x1:int,y1:int,x2:int,y2:int)->int:
+    result = 0
+    for x in range(x1,x2):
+        for y in range(y1,y2):
+            result += matrix[x][y]
+    return result
+
+def get_submatrix_rect(matrix:list, rect:list)->list:
+    return get_submatrix(matrix, rect[0], rect[1], rect[2], rect[3])
+
+def get_submatrix(matrix:list, x1:int,y1:int,x2:int,y2:int)->list:
+    new_matrix = []
+    for x in range(x1,x2):
+        row = []
+        for y in range(y1,y2):
+            row.append(matrix[x][y])
+        new_matrix.append(row)
+    return new_matrix
+
+def largest_submatrix(matrix: list, width: int, height: int)->list:
+    best_sum = -99999
+    rect = []
+    for x1 in range(width):
+        for y1 in range(height):
+            for x2 in range(x1,width):
+                for y2 in range(y1,height):
+                    curr_sum = sum_submatrix(matrix,x1,y1,x2,y2)
+                    if(curr_sum > best_sum):
+                        best_sum = curr_sum
+                        rect=[x1,y1,x2,y2]
+    return best_sum, get_submatrix_rect(matrix, rect)
+
+matrix = [
+    [6,-5,-7,4,-4],
+    [-9,3,-6,5,2],
+    [-10,4,7,-6,3],
+    [-8,9,-3,3,-7]
+]
+
+print("---")
+print(largest_submatrix(matrix,5,4))
