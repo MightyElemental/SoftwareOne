@@ -36,12 +36,49 @@ def find_pairs(num_pool: list, target: int) -> list:
             if(pair not in result): result.append(pair)
     return result
 
+print("---")
 print(find_pairs([1, 2, 4, 4], 8)) # [(4, 4)]
 print(find_pairs([-1, 1, 2, 4, 8], 7)) # [(-1, 8)]
 print(find_pairs([2, 4, 5, 7], 9)) # [(2, 7), (5, 4)]
 print(find_pairs([2, 4, 5, 7], 8)) # []
 print(find_pairs([-3, -1, 2, 3, 5, 9, 11], 8)) # [(-3, 11), (3, 5), (9, -1)]
 
+'''
+Example answer (before improvement)
+
+Function kSum(numbers:List, target:int):List
+    pairs = empty List
+    for i := 0 to numbers.size()-2 do
+        for j := i+1 to numbers.size()-1 do
+            if numbers[i] + numbers[j] = target then
+                pairs.append((numbers[i], numbers[j]))
+            endif
+        endfor
+    endfor
+    return pairs
+'''
+
+# improved solution (worked through in class)
+def find_pairs_improved(num_pool: list, target: int) -> list:
+    result=[]
+    start = 0
+    end=len(num_pool)-1
+    while(start < end):
+        if(num_pool[start]+num_pool[end]==target):
+            result.append((num_pool[start],num_pool[end]))
+            start+=1
+            end-=1
+        elif(num_pool[start]+num_pool[end]<target):
+            start+=1
+        else:
+            end-=1
+    return result
+
+print("---")
+print(find_pairs_improved([-1, 1, 2, 4, 8], 7)) # [(-1, 8)]
+print(find_pairs_improved([2, 4, 5, 7], 9)) # [(2, 7), (5, 4)]
+print(find_pairs_improved([2, 4, 5, 7], 8)) # []
+        
 
 # ---- Exercise 2 ----
 '''
