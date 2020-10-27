@@ -20,22 +20,20 @@ the problem. Given a list of size n, how many comparisons are done?
 '''
 
 # Answer
-# This is extremely inefficient method. I believe it has a time complexity classification of O(n^3)
+# This is extremely inefficient method. I believe it has a time complexity classification of O(n^2)
 '''
 Function largestSubList(numbers:List): List
     bestSubList = empty List
     bestSubListTotal := -9999999 # should be the smallest possible integer
     for start := 0 to numbers.size() do
+        subList = empty List
+        subListTotal := 0
         for end := start to numbers.size() do
-            subList = empty List
-            subListTotal := 0
-            for i := start to end do
-                subList.append(numbers[end])
-                subListTotal += numbers[end]
-            endfor
+            subList.append(numbers[end])
+            subListTotal += numbers[end]
             if(subListTotal > bestSubListTotal) then
                 bestSubListTotal = subListTotal
-                bestSubList = subList
+                bestSubList = subList.copy() # to ensure the result does not change unless desired
             endif
         endfor
     endfor
@@ -47,16 +45,17 @@ def largest_sub_list(numbers: list)->list:
     bestSubList = []
     bestSubListTotal = -9999999 # Python integers are unbounded so there is no minimum
     for start in range(len(numbers)):
+        sub_list = []
+        sub_list_total = 0
         for end in range(start,len(numbers)):
-            sub_list = []
-            sub_list_total = 0
-            for i in range(start, end):
-                sub_list.append(numbers[i])
-                sub_list_total += numbers[i]
+            sub_list.append(numbers[end])
+            sub_list_total += numbers[end]
             if(sub_list_total>bestSubListTotal):
                 bestSubListTotal = sub_list_total
-                bestSubList = sub_list
+                bestSubList = sub_list.copy()
     return bestSubList
+
+# This does n*(n-1)/2 comparisons
 
 print("---")
 print(largest_sub_list([ -2, 1, -3, 4, -1, 2, 1, -5, 4 ]))
@@ -67,3 +66,6 @@ print(largest_sub_list([ -2, 1, -3, 4, -1, 2, 1, -5, 4 ]))
 This is quite difficult, and a better approach will be explained during the seminar session. But
 it does not hurt to have a thought about it beforehand.
 '''
+
+# Maybe sum pairs of the numbers and generate a new list. I.e., -2+1 = -1, -3+4=1
+# Then maybe sum those down (maybe not)
