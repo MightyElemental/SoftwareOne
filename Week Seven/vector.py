@@ -10,7 +10,7 @@ class Vector:
                 self._vector = [float(x) for x in data[0]]
 
     def __str__(self):
-        return "<"+", ".join(str(x) for x in self._vector)+">"
+        return f"<{', '.join(str(x) for x in self._vector)}>"
 
     def dim(self):
         return len(self._vector)
