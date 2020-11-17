@@ -37,3 +37,15 @@ def sum_all(numbers:list)->int:
 #print(sum_all([1,[2,3],4]))
 
 # ---- Exercise 2 ----
+'''
+Given a binary pattern that contains ‘?’ wildcard character at few positions, find all possible
+combinations of binary strings that can be formed by replacing the wildcard character by either
+0 or 1. For example, for wildcard pattern 1?11?00?1?
+'''
+
+def wildcard_binary(bin_str: str)->list:
+    if "?" not in bin_str: return [bin_str]
+    return wildcard_binary(bin_str.replace("?","0",1)) \
+        +  wildcard_binary(bin_str.replace("?","1",1))
+
+#print("\n".join(wildcard_binary("1?11?00?1?")))
