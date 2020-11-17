@@ -73,6 +73,8 @@ def something_ish(pattern: str, word: str, flags: int = 0b0) -> bool:
     if len(word) <= 0: return False
     try:
         index = pattern.index(word[0])
+        # replace charaters with null char to allow duplicated letters
+        pattern = pattern.replace(word[0], "\x00", 1)
         flags |= 2**index
     except ValueError: pass #if not in word, ignore
     return something_ish(pattern, word[1:], flags)
