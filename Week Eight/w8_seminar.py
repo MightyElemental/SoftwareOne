@@ -49,3 +49,21 @@ def wildcard_binary(bin_str: str)->list:
         +  wildcard_binary(bin_str.replace("?","1",1))
 
 #print("\n".join(wildcard_binary("1?11?00?1?")))
+
+# ---- Exercise 3 ----
+'''
+Suppose you have a rod of length 𝑛, and you want to cut up the rod and sell the pieces in a way
+that maximizes the total amount of money you get. 
+'''
+
+def rod_cutting(prices:list, length:int)->int:
+    if(length <= 0): return 0
+    if(length == 1): return prices[0]
+    max_rods = []
+    for i in range(min(length,len(prices))):
+        max_rods.append(prices[i]+rod_cutting(prices,length-i-1))
+    return max(max_rods)
+
+prices=[1,5,8,9,10,17]
+
+#print(rod_cutting(prices, 22))
