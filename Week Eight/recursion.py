@@ -35,6 +35,14 @@ def flatten(mlist: list)->list:
 #print(flatten([[1], [1,[2,3]],3,4]))
 
 
+def merge(sorted_listA: list, sorted_listB: list) -> list:
+    if len(sorted_listA) == 0: return sorted_listB
+    if len(sorted_listB) == 0: return sorted_listA
+    if(sorted_listA[0] <= sorted_listB[0]):
+        return sorted_listA[:1]+merge(sorted_listA[1:], sorted_listB)
+    else:
+        return sorted_listB[:1]+merge(sorted_listA, sorted_listB[1:])
+
 
 def iselfish_cheating(word: str)->bool:
     print(word)
