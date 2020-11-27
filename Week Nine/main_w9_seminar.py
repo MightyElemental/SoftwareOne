@@ -98,7 +98,61 @@ def random_points(point_count: int, width:int, height:int) -> list:
 width = 128
 height = 300
 points = random_points(10,width,height)
-img = generate_voronoi(width,height,points)#[(10,10),(32,5),(5,50),(50,50)]
-save_to_file(img, "diagram")
-img = generate_voronoi_alt(width,height,points)
-save_to_file(img, "diagram_iter")
+#img = generate_voronoi(width,height,points)#[(10,10),(32,5),(5,50),(50,50)]
+#save_to_file(img, "diagram")
+#img = generate_voronoi_alt(width,height,points)
+#save_to_file(img, "diagram_iter")
+
+
+# ---- Problem 2 ----
+
+def find_cell(matrix, x, y, current_label):
+    if matrix[y][x] != 1: return
+    matrix[y][x] = current_label
+    if x-1 >= 0:
+        find_cell(matrix, x-1, y, current_label)
+    if x+1 < len(matrix[0]):
+        find_cell(matrix, x+1, y, current_label)
+    if y-1 >= 0:
+        find_cell(matrix, x, y-1, current_label)
+    if y+1 < len(matrix):
+        find_cell(matrix, x, y+1, current_label)
+
+
+def label_cells(matrix:list):
+    result = copy.deepcopy(matrix)
+    current_label = 2
+    for y in range(len(result)):
+        for x in range(len(result[0])):
+            if result[y][x] == 0: continue
+            if result[y][x] == 1:
+                find_cell(result, x, y, current_label)
+                current_label+=1
+    return result
+
+mat = [
+    [0,0,1,0,1],
+    [1,1,0,0,1],
+    [1,0,0,1,0],
+    [0,0,1,1,1],
+    [1,1,0,1,1]
+]
+
+mat2 = [
+    [0,0,0,0,0,0,0,0],
+    [1,0,0,0,0,1,0,0],
+    [1,1,1,0,1,1,1,0],
+    [1,0,1,0,0,1,1,0],
+    [1,1,1,0,0,0,0,0],
+    [1,1,0,0,0,0,0,0],
+    [0,0,0,0,0,0,1,1],
+    [0,0,0,0,0,0,1,1]
+]
+
+labelled_mat = label_cells(mat)
+for row in labelled_mat:
+    print(row)
+
+labelled_mat = label_cells(mat2)
+for row in labelled_mat:
+    print(row)
