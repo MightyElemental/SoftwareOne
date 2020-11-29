@@ -9,28 +9,34 @@ def generate_voronoi(width:int, height:int, seeds:list)->list:
     result = [[-1 for i in range(width)] for i in range(height)]
     seed_count = len(seeds)
     colors = [rand.randint(0x0F0F0F, 0xFFFFFF) for i in range(seed_count)]
+    to_scan = []
     # place seeds
     for i in range(len(seeds)):
         seed = seeds[i]
-        result[seed[1]][seed[0]] = colors[i]  
+        result[seed[1]][seed[0]] = colors[i]
+        to_scan.append(seed)
 
-    flag = True
+    # fill img matrix
     m=0
-    while(flag):
-        flag = False
-        next_result = copy.deepcopy(result)
-        for x in range(width):
-            for y in range(height):
-                if not flag and result[y][x] == -1:
-                    flag = True
-                    print(f"{m}: found -1 at {x}x{y}")
-                else:
-                    col = result[y][x]
-                    if y-1 >= 0 and next_result[y-1][x]==-1: next_result[y-1][x] = col
-                    if y+1 < height and next_result[y+1][x] == -1: next_result[y+1][x] = col
-                    if x-1 >= 0 and next_result[y][x-1]==-1: next_result[y][x-1] = col
-                    if x+1 < width and next_result[y][x+1]==-1: next_result[y][x+1] = col
-        result = next_result
+    while(len(to_scan)>0):
+        next_to_scan = []
+        for point in to_scan:
+            x = point[0]
+            y = point[1]
+            col = result[y][x]
+            if y-1 >= 0 and result[y-1][x]==-1:
+                result[y-1][x] = col
+                next_to_scan.append((x,y-1))
+            if y+1 < height and result[y+1][x] == -1:
+                result[y+1][x] = col
+                next_to_scan.append((x,y+1))
+            if x-1 >= 0 and result[y][x-1]==-1:
+                result[y][x-1] = col
+                next_to_scan.append((x-1,y))
+            if x+1 < width and result[y][x+1]==-1:
+                result[y][x+1] = col
+                next_to_scan.append((x+1,y))
+        to_scan = next_to_scan
         #if(m%2==0): save_to_file(result, f"temp/diagram_{m//2}")
         m+=1
     # re-add points
@@ -95,8 +101,8 @@ def random_points(point_count: int, width:int, height:int) -> list:
         result.append( (rand.randint(0,width-1), rand.randint(0,height-1)) )
     return result
 
-width = 128
-height = 300
+width = 512
+height = 512
 points = random_points(10,width,height)
 #img = generate_voronoi(width,height,points)#[(10,10),(32,5),(5,50),(50,50)]
 #save_to_file(img, "diagram")
@@ -149,10 +155,10 @@ mat2 = [
     [0,0,0,0,0,0,1,1]
 ]
 
-labelled_mat = label_cells(mat)
-for row in labelled_mat:
-    print(row)
+#labelled_mat = label_cells(mat)
+#for row in labelled_mat:
+#    print(row)
 
-labelled_mat = label_cells(mat2)
-for row in labelled_mat:
-    print(row)
+#labelled_mat = label_cells(mat2)
+#for row in labelled_mat:
+#    print(row)
