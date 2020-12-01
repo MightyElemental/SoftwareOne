@@ -18,7 +18,7 @@ def generate_voronoi(width:int, height:int, seeds:list)->list:
 
     # fill img matrix
     m=0
-    while(len(to_scan)>0):
+    while(to_scan):
         next_to_scan = []
         for point in to_scan:
             x = point[0]
@@ -130,7 +130,6 @@ def label_cells(matrix:list):
     current_label = 2
     for y in range(len(result)):
         for x in range(len(result[0])):
-            if result[y][x] == 0: continue
             if result[y][x] == 1:
                 find_cell(result, x, y, current_label)
                 current_label+=1
